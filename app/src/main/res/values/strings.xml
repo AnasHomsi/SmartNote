@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Smart Note</string>
+    <string name="title_activity_smart_note">SmartNote</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_add_note">AddNote</string>
+</resources>
