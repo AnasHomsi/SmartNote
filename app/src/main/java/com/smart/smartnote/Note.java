@@ -6,5 +6,5 @@ package com.smart.smartnote;
 public class Note {
     private String NoteSubject;
 
-
+    private int k;
 }
