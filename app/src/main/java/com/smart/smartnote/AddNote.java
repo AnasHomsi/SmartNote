@@ -3,7 +3,6 @@ package com.smart.smartnote;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,7 +11,7 @@ import android.widget.Toast;
 
 public class AddNote extends AppCompatActivity {
     DBAdapter MyDB;
-long num_id;
+    long num_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +27,7 @@ long num_id;
         fab_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
+
                 num_id=MyDB.insertRow(NoteSubject.getText().toString(), NoteBody.getText().toString());
                 Intent i0 = new Intent(AddNote.this, SmartNote.class);
                 i0.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
