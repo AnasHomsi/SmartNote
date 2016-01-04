@@ -20,12 +20,10 @@ import java.util.List;
 public class MCA extends ArrayAdapter<Note> {
     DBAdapter MyDB;
     private final Context context;
-    //private List<Note> elements;
 
     public MCA(Context context, int layout, ArrayList<Note> notes) {
         super(context, layout,notes);
         this.context = context;
-        //this.elements = notes;
     }
 
     @Override
@@ -44,11 +42,6 @@ public class MCA extends ArrayAdapter<Note> {
         body.setText(note.NoteBody);
         // Return the completed view to render on screen
 
-        //View rowView = super.getView(position,convertView,parent);
-        //TextView title = (TextView) rowView.findViewById(R.id.item_subject);
-        //TextView body = (TextView) rowView.findViewById(R.id.item_body);
-        //Button bb= (Button) rowView.findViewById(R.id.item_delete);
-
         Button bb = (Button) convertView.findViewById(R.id.item_delete);
         bb.setTag(note.RecID);
         bb.setOnClickListener(new View.OnClickListener() {
@@ -60,14 +53,8 @@ public class MCA extends ArrayAdapter<Note> {
 
             }
         });
-        //return rowView;
 
         return convertView;
-
-
-
-
-
 
     }
 
