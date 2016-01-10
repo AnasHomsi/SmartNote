@@ -3,11 +3,13 @@ package com.smart.smartnote;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,7 +31,7 @@ public class MCA extends ArrayAdapter<Note> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        Note note = getItem(position);
+        final Note note = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_layout, parent, false);
@@ -41,6 +43,18 @@ public class MCA extends ArrayAdapter<Note> {
         title.setText(note.NoteSubject);
         body.setText(note.NoteBody);
         // Return the completed view to render on screen
+
+        Button Btn_Share= (Button) convertView.findViewById(R.id.item_Share);
+        Btn_Share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, note.NoteSubject);
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, note.NoteBody);
+                context.startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            }
+        });
 
         Button bb = (Button) convertView.findViewById(R.id.item_delete);
         bb.setTag(note.RecID);

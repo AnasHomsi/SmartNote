@@ -22,9 +22,14 @@
             android:name=".AddNote"
             android:label="@string/title_activity_add_note"
             android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- android:windowSoftInputMode="adjustResize" ... Move layouts up when soft keyboard is shown -->
+        <activity
+            android:name=".EditNote"
+            android:label="@string/title_activity_edit_note"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize"
             ></activity>
-        <!--android:windowSoftInputMode="adjustResize" ... Move layouts up when soft keyboard is shown-->
     </application>
 
 </manifest>
