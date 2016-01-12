@@ -4,19 +4,15 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class MCA extends ArrayAdapter<Note> {
@@ -24,7 +20,7 @@ public class MCA extends ArrayAdapter<Note> {
     private final Context context;
 
     public MCA(Context context, int layout, ArrayList<Note> notes) {
-        super(context, layout,notes);
+        super(context, layout, notes);
         this.context = context;
     }
 
@@ -42,9 +38,10 @@ public class MCA extends ArrayAdapter<Note> {
         // Populate the data into the template view using the data object
         title.setText(note.NoteSubject);
         body.setText(note.NoteBody);
-        // Return the completed view to render on screen
 
-        Button Btn_Share= (Button) convertView.findViewById(R.id.item_Share);
+
+        //Share Feature
+        Button Btn_Share = (Button) convertView.findViewById(R.id.item_Share);
         Btn_Share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +60,7 @@ public class MCA extends ArrayAdapter<Note> {
 
             @Override
             public void onClick(View v) {
-                alertTwoButtons(v,position);
+                alertTwoButtons(v, position);
 
             }
         });
@@ -72,16 +69,16 @@ public class MCA extends ArrayAdapter<Note> {
 
     }
 
-    public void alertTwoButtons(final View v,final int position) {
-        new AlertDialog.Builder(context)
-                .setTitle("Two Buttons")
-                .setMessage(MCA.this.getItem(position).NoteSubject+" note will be deleted, Are you sure?")
+    public void alertTwoButtons(final View v, final int position) {
+        AlertDialog.Builder builder= new AlertDialog.Builder(context,R.style.AlertDialogStyle);
+                builder.setTitle("Be Sure")
+                .setMessage("| "+MCA.this.getItem(position).NoteSubject + " | note will be deleted, Are you sure?")
                 .setPositiveButton("YES",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 MyDB = new DBAdapter(context);
                                 MyDB.open();
-                                Toast.makeText(context,position+"",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, position + "", Toast.LENGTH_SHORT).show();
                                 MyDB.deleteRow((Long) v.getTag());
                                 MCA.this.notifyDataSetChanged();
                                 MCA.this.remove(getItem(position));
@@ -92,7 +89,16 @@ public class MCA extends ArrayAdapter<Note> {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
-                }).show();
+                });
+        AlertDialog dialog = builder.show();
+
+        // Set title divider color
+        int titleDividerId = context.getResources().getIdentifier("titleDivider", "id", "android");
+        View titleDivider = dialog.findViewById(titleDividerId);
+        if (titleDivider != null) {
+            titleDivider.setBackgroundColor(context.getResources().getColor(R.color.colorAccent));
+        }
+
     }
 
 }

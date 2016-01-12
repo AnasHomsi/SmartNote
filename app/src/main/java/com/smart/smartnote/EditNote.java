@@ -22,13 +22,10 @@ public class EditNote extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         openDB();
-        final EditText NoteSubject= (EditText) findViewById(R.id.NoteSubject);
-        final EditText NoteBody= (EditText) findViewById(R.id.NoteBody);
+        final EditText NoteSubject = (EditText) findViewById(R.id.NoteSubject);
+        final EditText NoteBody = (EditText) findViewById(R.id.NoteBody);
 
-        // To retrieve object in second Activity
-       ;
-
-        NoteSubject.setText( getIntent().getSerializableExtra("NoteS").toString());
+        NoteSubject.setText(getIntent().getSerializableExtra("NoteS").toString());
         NoteBody.setText(getIntent().getSerializableExtra("NoteB").toString());
 
         FloatingActionButton fab_Save = (FloatingActionButton) findViewById(R.id.fab_Save);
@@ -37,7 +34,7 @@ public class EditNote extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                num_id=MyDB.updateRow((Long) getIntent().getSerializableExtra("NoteI"),NoteSubject.getText().toString(),NoteBody.getText().toString());
+                num_id = MyDB.updateRow((Long) getIntent().getSerializableExtra("NoteI"), NoteSubject.getText().toString(), NoteBody.getText().toString());
                 Intent i0 = new Intent(EditNote.this, SmartNote.class);
                 i0.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i0);
